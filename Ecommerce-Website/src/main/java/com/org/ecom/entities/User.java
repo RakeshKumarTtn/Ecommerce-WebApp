@@ -1,6 +1,7 @@
 package com.org.ecom.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,10 +28,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @AllArgsConstructor
 @NoArgsConstructor
-//@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class User extends Auditable implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -80,6 +81,22 @@ public class User extends Auditable implements Serializable {
 
     @Column(name = "INVALID_ATTEMPT_COUNT")
     private int invalidAttemptCount;
+
+    @CreatedBy
+    @Column(nullable = false, updatable = false)
+    private String createdBy;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime created;
+
+    @LastModifiedBy
+    @Column(nullable = false)
+    private String modifiedBy;
+
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime modified;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Address> userAddress;
