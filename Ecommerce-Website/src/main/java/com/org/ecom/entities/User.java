@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.org.ecom.audit.Auditable;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -18,18 +19,18 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@Entity
+
 @Getter
 @Setter
 @Table(name = "USER")
 @Inheritance(strategy = InheritanceType.JOINED)
-@EnableJpaAuditing
+
 @AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
+//@EntityListeners(AuditingEntityListener.class)
+@Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
-public class User implements Serializable {
+public class User extends Auditable implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -79,24 +80,6 @@ public class User implements Serializable {
 
     @Column(name = "INVALID_ATTEMPT_COUNT")
     private int invalidAttemptCount;
-
-    @Column(name = "CREATED_DATE", updatable = false)
-    @CreatedDate
-    @Temporal(TemporalType.DATE)
-    private Date createdDate;
-
-    @Column(name = "MODIFIED_DATE")
-    @LastModifiedDate
-    @Temporal(TemporalType.DATE)
-    private Date modifiedDate;
-
-    @Column(name = "CREATED_BY")
-    @CreatedBy
-    private String createdBy;
-
-    @Column(name = "MODIFIED_BY")
-    @LastModifiedBy
-    private String modifiedBy;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Address> userAddress;
