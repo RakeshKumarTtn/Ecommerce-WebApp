@@ -12,6 +12,11 @@ import javax.validation.constraints.Size;
 @Getter
 public class UserDto {
 
+    private Long userId;
+
+    @NotEmpty
+    private String username;
+
     @NotEmpty(message = "Enter the firstName")
     private String firstName;
 
@@ -33,5 +38,13 @@ public class UserDto {
 
     private String passwordUpdateDate;
 
-    private Long invalidAttemptCount;
+    private int invalidAttemptCount;
+
+    private Boolean isDeleted;
+
+    private Boolean isActive;
+
+    private Boolean isExpired;
+
+    private Boolean isLocked;
 }
