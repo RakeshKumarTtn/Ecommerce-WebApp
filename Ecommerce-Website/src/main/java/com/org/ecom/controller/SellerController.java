@@ -7,6 +7,8 @@ import com.org.ecom.entities.User;
 import com.org.ecom.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -18,7 +20,13 @@ public class SellerController {
     @Autowired
     SellerService sellerService;
 
-    @PostMapping()
+    @GetMapping("/home")
+    ResponseEntity sellerHome() {
+        String msg = "Seller Home";
+        return new ResponseEntity(msg, HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
     public UserDto addSeller(@RequestBody SellerDto sellerDto) {
         return sellerService.addSeller(sellerDto);
     }

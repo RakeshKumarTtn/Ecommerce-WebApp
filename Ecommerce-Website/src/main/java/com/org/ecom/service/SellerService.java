@@ -31,7 +31,8 @@ public class SellerService {
     public Set<Seller> getAllActiveSeller() {
         List<Seller> sellers = sellerRepository.findAll();
         Set<Seller> sellerSet = new HashSet<>();
-        sellerSet = sellerRepository.listOfActiveUser("Something", true);
+        List<Long> sellerIds = sellerRepository.findAllSellerId();
+        sellerSet = sellerRepository.listOfActiveUser("Something", true, sellerIds);
         return sellerSet;
     }
 
