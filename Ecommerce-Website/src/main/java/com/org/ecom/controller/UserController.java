@@ -6,7 +6,6 @@ import com.org.ecom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -16,7 +15,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping()
+    /*@PostMapping()
     public UserDto addUser(@RequestBody UserDto userDto) {
         return userService.addUser(userDto);
     }
@@ -39,5 +38,12 @@ public class UserController {
     @DeleteMapping("/delete/username/{username}")
     public User deleteUserByUserName(@PathVariable String username) {
         return userService.deleteUserByUserName(username);
-    }
+    }*/
+
+/*
+    @PatchMapping(path = "/update")
+    @ResponseBody
+    public ResponseEntity updateUserPatch(@RequestBody UserDto userDto) {
+        return userService.updateUserPatch(userDto);
+    }*/
 }

@@ -1,6 +1,7 @@
 package com.org.ecom.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+@NoArgsConstructor
 @Setter
 @Getter
 public class UserDto {
@@ -47,4 +49,14 @@ public class UserDto {
     private Boolean isExpired;
 
     private Boolean isLocked;
+
+    public UserDto(String email, String username, String firstName, String middleName, String lastName, String password, String confirmPassword) {
+        this.email = email;
+        this.username = username;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
 }

@@ -20,7 +20,7 @@ import javax.persistence.*;
 public class Seller extends User {
 
     @Column(name = "GST", updatable = true, nullable = false)
-    private String contact;
+    private String gstin;
 
     @Column(name = "COMPANY_NAME", updatable = true, nullable = false)
     private String companyName;

@@ -1,16 +1,10 @@
 package com.org.ecom.service;
 
-import com.org.ecom.dto.UserDto;
-import com.org.ecom.entities.User;
 import com.org.ecom.repository.UserRepository;
 import com.org.ecom.utility.ObjectConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserService {
@@ -20,7 +14,7 @@ public class UserService {
 
     @Autowired
     ObjectConverter objectConverter;
-
+/*
     public UserDto addUser(UserDto userDto) {
         User user = objectConverter.dtoToEntity(userDto);
         user = userRepository.save(user);
@@ -50,13 +44,27 @@ public class UserService {
     }
 
 
+    @Transactional
     public UserDto updateUser(UserDto userDto) {
         User user = userRepository.findByEmail(userDto.getEmail());
-        if (!user.getIsActive()) {
-            System.out.println("NO CHANGES IN UPDATE...");
-            return userDto;
-        }
         userRepository.delete(user);
         return objectConverter.entityToDto(userRepository.save(objectConverter.dtoToEntity(userDto)));
-    }
+    }*/
+
+/*    @Transactional
+    public ResponseEntity updateUserPatch(UserDto userDto) {
+        Optional<User> userOptional = null;
+        if (userDto.getEmail() != null) {
+            userOptional = Optional.of(userRepository.findByEmail(userDto.getEmail()));
+        } else {
+            return ResponseEntity.ok().body("Please Provide Email Id...");
+        }
+        userOptional.orElseThrow((ResourceNotFoundException::new));
+        User user = userOptional.get();
+
+        userRepository.updateUser(user.getUsername(), user.getFirstName(), user.getLastName(), user.getMiddleName(), user.getEmail(), user.getPassword(), user.getIsActive(), user.getIsDeleted(), user.getIsLocked(), user.getIsExpired(), user.getPasswordUpdateDate(), user.getInvalidAttemptCount());
+        return ResponseEntity.ok().body("profile is updated successfully");
+    }*/
 }
+
+
