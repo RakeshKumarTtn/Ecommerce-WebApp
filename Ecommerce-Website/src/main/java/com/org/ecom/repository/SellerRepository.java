@@ -1,7 +1,6 @@
 package com.org.ecom.repository;
 
 import com.org.ecom.entities.Seller;
-import com.org.ecom.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -19,14 +19,14 @@ class EcommerceWebsiteApplicationTests {
     @Autowired
     UserRepository userRepository;
 
-    @Test
+   /* @Test
     public void testSeller() {
-        User user = new User();
-        user.setFirstName("Rakesh");
-        user.setMiddleName("Kumar");
-        user.setLastName("Prajapati");
-        user.setEmail("rakeshp@ttn.com");
-        user.setPassword("123456");
+        UserEntity userEntity = new UserEntity();
+        userEntity.setFirstName("Rakesh");
+        userEntity.setMiddleName("Kumar");
+        userEntity.setLastName("Prajapati");
+        userEntity.setEmail("rakeshp@ttn.com");
+        userEntity.setPassword("123456");
 
         Address address = new Address();
         address.setAddressLine("Lane 4");
@@ -35,9 +35,9 @@ class EcommerceWebsiteApplicationTests {
         address.setZipCode("110018");
         address.setCountryName("India");
 
-        user.addAddress(address);
+        userEntity.addAddress(address);
 
-/*
+
         Seller seller = new Seller();
         seller.setCompanyContact("9953256940");
         seller.setCompanyName("Reliance");
@@ -50,17 +50,17 @@ class EcommerceWebsiteApplicationTests {
 
         //seller.setUser(user);
 
-        sellerRepository.save(seller);*/
-    }
+        sellerRepository.save(seller);
+    }*/
 
-    @Test
+   /* @Test
     void testCustomer() {
-        User user = new User();
-        user.setFirstName("Rakesh");
-        user.setMiddleName("Kumar");
-        user.setLastName("Prajapati");
-        user.setEmail("rakeshp@ttn.com");
-        user.setPassword("123456");
+        UserEntity userEntity = new UserEntity();
+        userEntity.setFirstName("Rakesh");
+        userEntity.setMiddleName("Kumar");
+        userEntity.setLastName("Prajapati");
+        userEntity.setEmail("rakeshp@ttn.com");
+        userEntity.setPassword("123456");
 
         Address address = new Address();
         address.setAddressLine("Lane 4");
@@ -69,7 +69,7 @@ class EcommerceWebsiteApplicationTests {
         address.setZipCode("110018");
         address.setCountryName("India");
 
-        user.addAddress(address);
+        userEntity.addAddress(address);
 
         Address address1 = new Address();
         address1.setAddressLine("Lane 5");
@@ -78,35 +78,35 @@ class EcommerceWebsiteApplicationTests {
         address1.setZipCode("110019");
         address1.setCountryName("India");
 
-        user.addAddress(address1);
+        userEntity.addAddress(address1);
 
         Customer customer = new Customer();
         customer.setContact("9953256940");
 
-        Role role1 = new Role();
+        *//*Role role1 = new Role();
         role1.setAuthority("ADMIN");
 
-        user.addRole(role1);
+        userEntity.addRole(role1);
 
         Role role2 = new Role();
         role2.setAuthority("USER");
 
-        user.addRole(role2);
+        userEntity.addRole(role2);
 
-        customer.setUser(user);
+        customer.setUser(userEntity);
 
-        customerRepository.save(customer);
-    }
+        customerRepository.save(customer);*//*
+    }*/
 
 
-    @Test
+    /*@Test
     public void testManyToMany() {
-        User user = new User();
-        user.setFirstName("Rakesh");
-        user.setMiddleName("Kumar");
-        user.setLastName("Prajapati");
-        user.setEmail("rakeshp@ttn.com");
-        user.setPassword("123456");
+        UserEntity userEntity = new UserEntity();
+        userEntity.setFirstName("Rakesh");
+        userEntity.setMiddleName("Kumar");
+        userEntity.setLastName("Prajapati");
+        userEntity.setEmail("rakeshp@ttn.com");
+        userEntity.setPassword("123456");
 
         Address address = new Address();
         address.setAddressLine("Lane_68");
@@ -114,19 +114,19 @@ class EcommerceWebsiteApplicationTests {
         address.setStateName("UP");
         address.setZipCode("121002");
         address.setCountryName("India");
-        user.addAddress(address);
+        userEntity.addAddress(address);
 
         Role role1 = new Role();
         role1.setAuthority("ADMIN");
 
-        user.addRole(role1);
+        userEntity.addRole(role1);
 
 
         Role role2 = new Role();
         role2.setAuthority("USER");
 
-        user.addRole(role2);
+        userEntity.addRole(role2);
 
-        userRepository.save(user);
-    }
+        userRepository.save(userEntity);
+    }*/
 }

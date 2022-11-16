@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Setter
 @PrimaryKeyJoinColumn(name = "ID")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Seller extends User {
+public class Seller extends UserEntity {
 
     @Column(name = "GST", updatable = true, nullable = false)
     private String gstin;

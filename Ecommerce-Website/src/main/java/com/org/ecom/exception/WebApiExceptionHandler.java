@@ -1,4 +1,3 @@
-/*
 package com.org.ecom.exception;
 
 
@@ -84,4 +83,3 @@ public class WebApiExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
     }
 }
-*/

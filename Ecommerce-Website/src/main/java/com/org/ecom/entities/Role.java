@@ -17,9 +17,8 @@ public class Role {
     private Long roleId;
 
     @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
-    private Set<User> users;
+    private Set<UserEntity> userEntities;
 
     @Column(name = "AUTHORITY", updatable = true, nullable = false)
     private String authority;
-
 }

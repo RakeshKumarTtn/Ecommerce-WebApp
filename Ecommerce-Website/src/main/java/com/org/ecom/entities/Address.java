@@ -49,5 +49,5 @@ public class Address implements Serializable {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
+    private UserEntity userEntity;
 }

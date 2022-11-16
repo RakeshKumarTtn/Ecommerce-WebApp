@@ -1,12 +1,8 @@
 package com.org.ecom.controller;
 
-import com.org.ecom.dto.UserDto;
-import com.org.ecom.entities.User;
 import com.org.ecom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/ecom/user")

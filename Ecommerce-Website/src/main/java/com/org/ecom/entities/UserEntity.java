@@ -2,9 +2,7 @@ package com.org.ecom.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
@@ -13,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -31,7 +28,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class User implements Serializable {
+public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -99,7 +96,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     private LocalDateTime modified;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Address> userAddress;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -107,14 +104,14 @@ public class User implements Serializable {
     @JoinTable(name = "USER_ROLE",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "roleId"))
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public void addAddress(Address address) {
         if (address != null) {
             if (userAddress == null) {
                 userAddress = new HashSet<>();
             }
-            address.setUser(this);
+            address.setUserEntity(this);
             userAddress.add(address);
         }
     }
@@ -122,7 +119,7 @@ public class User implements Serializable {
     public void addRole(Role role) {
         if (role != null) {
             if (roles == null) {
-                roles = new HashSet<>();
+                roles = new ArrayList<>();
             }
             roles.add(role);
         }

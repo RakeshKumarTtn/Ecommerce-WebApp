@@ -1,6 +1,6 @@
 package com.org.ecom.audit;
 
-import com.org.ecom.entities.User;
+import com.org.ecom.entities.UserEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -21,14 +21,14 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class Auditable {
     @CreatedBy
-    protected User createdBy;
+    protected UserEntity createdBy;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     protected Date createdDate;
 
     @LastModifiedBy
-    protected User lastModifiedBy;
+    protected UserEntity lastModifiedBy;
 
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)

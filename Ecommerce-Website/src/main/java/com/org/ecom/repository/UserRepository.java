@@ -1,6 +1,6 @@
 package com.org.ecom.repository;
 
-import com.org.ecom.entities.User;
+import com.org.ecom.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,18 +12,18 @@ import java.util.Optional;
 import java.util.Set;
 
 @EnableJpaRepositories
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    Optional<User> findById(Long id);
+    Optional<UserEntity> findById(Long id);
 
-    User findByUsername(String username);
+    UserEntity findByUsername(String username);
 
-    User findByEmail(String email);
+    UserEntity findByEmail(String email);
 
-    List<User> findAll();
+    List<UserEntity> findAll();
 
     @Query(value = "select * from USER u where u.EMAIL!= :email and u.IS_ACTIVE= :isActive", nativeQuery = true)
-    Set<User> listOfActiveUser(@Param("email") String email, @Param("isActive") Boolean isActive);
+    Set<UserEntity> listOfActiveUser(@Param("email") String email, @Param("isActive") Boolean isActive);
 
     //Modifying queries only used with void int return type
     @Modifying

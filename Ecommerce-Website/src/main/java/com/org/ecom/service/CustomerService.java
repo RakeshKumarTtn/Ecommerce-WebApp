@@ -1,11 +1,8 @@
 package com.org.ecom.service;
 
 import com.org.ecom.dto.CustomerDto;
-import com.org.ecom.dto.SellerDto;
 import com.org.ecom.dto.UserDto;
 import com.org.ecom.entities.Customer;
-import com.org.ecom.entities.Seller;
-import com.org.ecom.entities.User;
 import com.org.ecom.repository.CustomerRepository;
 import com.org.ecom.utility.ObjectConverter;
 import org.springframework.beans.factory.annotation.Autowired;

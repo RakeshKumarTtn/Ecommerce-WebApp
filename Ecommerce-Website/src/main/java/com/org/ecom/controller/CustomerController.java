@@ -3,7 +3,7 @@ package com.org.ecom.controller;
 import com.org.ecom.dto.CustomerDto;
 import com.org.ecom.dto.UserDto;
 import com.org.ecom.entities.Customer;
-import com.org.ecom.entities.User;
+import com.org.ecom.entities.UserEntity;
 import com.org.ecom.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
@@ -37,12 +37,12 @@ public class CustomerController {
     }
 
     @DeleteMapping("/delete/{email}")
-    public User deleteCustomerByEmail(@PathVariable String email) {
+    public UserEntity deleteCustomerByEmail(@PathVariable String email) {
         return customerService.deleteCustomerByEmail(email);
     }
 
     @DeleteMapping("/delete/username/{username}")
-    public User deleteCustomerByUserName(@PathVariable String username) {
+    public UserEntity deleteCustomerByUserName(@PathVariable String username) {
         return customerService.deleteCustomerByUserName(username);
     }
 
