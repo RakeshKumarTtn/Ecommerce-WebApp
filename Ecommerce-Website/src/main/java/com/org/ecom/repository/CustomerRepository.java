@@ -3,9 +3,11 @@ package com.org.ecom.repository;
 import com.org.ecom.entities.Customer;
 import com.org.ecom.entities.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import javax.persistence.EntityManager;
@@ -15,7 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
+
+    List<Customer> findAll(Pageable pageable);
 
     Optional<Customer> findById(Long id);
 

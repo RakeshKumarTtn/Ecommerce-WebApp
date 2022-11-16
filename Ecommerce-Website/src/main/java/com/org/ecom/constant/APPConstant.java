@@ -13,22 +13,4 @@ public interface APPConstant {
     public static final Boolean IS_ACTIVE = false;
     public static final Boolean IS_EXPIRED = false;
     public static final Boolean IS_LOCKED = false;
-
-
-    public enum CASE_MAP {
-        LOST("LOST"),
-        INTERNAL_SR("INTERNAL_SR"),
-        NEW("NEW");
-
-        private final String value;
-
-        private CASE_MAP(String val) {
-            this.value = val;
-        }
-
-        @Override
-        public String toString() {
-            return this.value;
-        }
-    }
 }

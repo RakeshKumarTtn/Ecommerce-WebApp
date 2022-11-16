@@ -47,7 +47,6 @@ public class Address implements Serializable {
     @Column(name = "LABEL")
     private String label;
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     private UserEntity userEntity;
 }

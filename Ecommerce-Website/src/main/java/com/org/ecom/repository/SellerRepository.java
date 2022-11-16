@@ -13,6 +13,11 @@ import java.util.Set;
 
 @EnableJpaRepositories
 public interface SellerRepository extends JpaRepository<Seller, Long> {
+
+    Optional<Seller> findByCompanyName(String companyName);
+
+    Seller findByGstin(String gstin);
+
     Optional<Seller> findById(Long id);
 
     Seller findByUsername(String username);

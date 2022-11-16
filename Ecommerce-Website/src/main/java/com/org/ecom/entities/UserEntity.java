@@ -53,6 +53,9 @@ public class UserEntity implements Serializable {
     @Column(name = "EMAIL", unique = true, updatable = true, nullable = false)
     private String email;
 
+    @Column(name = "MOBILE", unique = true, updatable = true, nullable = false)
+    private Long mobile;
+
     @Column(name = "PASSWORD", updatable = true, nullable = false)
     private String password;
 

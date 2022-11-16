@@ -32,6 +32,10 @@ public class UserDto {
     @Email(message = "Invalid Email")
     private String email;
 
+    @NotEmpty
+    @Column(nullable = false, unique = true)
+    private long mobile;
+
     @NotEmpty(message = "Password cannot be null")
     @Size(min = 8)
     private String password;
