@@ -9,7 +9,7 @@ import com.org.ecom.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -25,7 +25,7 @@ public class Bootstrap implements ApplicationRunner {
     UserRepository userRepository;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -38,7 +38,7 @@ public class Bootstrap implements ApplicationRunner {
             user.setLastName("Prajapati");
             user.setEmail("rakesh.kumar3@tothenew.com");
             user.setMobile(9718122312L);
-            user.setPassword(bCryptPasswordEncoder.encode("Admin@123"));
+            user.setPassword("Admin@123");
             user.setPasswordUpdateDate(new Date());
             user.setIsDeleted(APPConstant.IS_DELETED);
             user.setIsActive(!APPConstant.IS_ACTIVE);
@@ -60,7 +60,7 @@ public class Bootstrap implements ApplicationRunner {
 
             user.setUserAddress(addresses);
 
-            List<Role> roles = new ArrayList<>();
+            Set<Role> roles = new HashSet<>();
             Role role = new Role();
             role.setAuthority("ROLE_ADMIN");
 

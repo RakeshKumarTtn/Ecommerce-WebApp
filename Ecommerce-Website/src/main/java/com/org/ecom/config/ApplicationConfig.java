@@ -1,3 +1,4 @@
+/*
 package com.org.ecom.config;
 
 
@@ -8,15 +9,5 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class ApplicationConfig {
-    @Bean
-    public ModelMapper modelMapper() {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper;
-    }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder()
-    {
-        return new BCryptPasswordEncoder();
-    }
-}
+}*/

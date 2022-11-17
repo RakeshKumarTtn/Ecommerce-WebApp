@@ -107,7 +107,7 @@ public class UserEntity implements Serializable {
     @JoinTable(name = "USER_ROLE",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "roleId"))
-    private List<Role> roles;
+    private Set<Role> roles;
 
     public void addAddress(Address address) {
         if (address != null) {
@@ -122,7 +122,7 @@ public class UserEntity implements Serializable {
     public void addRole(Role role) {
         if (role != null) {
             if (roles == null) {
-                roles = new ArrayList<>();
+                roles = new HashSet<>();
             }
             roles.add(role);
         }

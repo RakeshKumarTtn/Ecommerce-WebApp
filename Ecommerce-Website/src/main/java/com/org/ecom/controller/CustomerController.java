@@ -26,6 +26,11 @@ public class CustomerController {
         return new ResponseEntity(msg, HttpStatus.OK);
     }
 
+    @GetMapping("/login")
+    public String display() {
+        return "WELCOME TO SPRING BOOT";
+    }
+
     @PostMapping("/add")
     public UserDto addCustomer(@RequestBody CustomerDto customerDto) {
         return customerService.addCustomer(customerDto);
