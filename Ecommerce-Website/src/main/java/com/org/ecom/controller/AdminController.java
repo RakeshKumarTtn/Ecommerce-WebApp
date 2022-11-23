@@ -1,21 +1,21 @@
-/*
 package com.org.ecom.controller;
 
-import com.org.ecom.entities.UserEntity;
+import com.org.ecom.dto.RegisteredCustomer;
 import com.org.ecom.repository.CustomerRepository;
 import com.org.ecom.repository.SellerRepository;
+import com.org.ecom.service.AdminService;
 import com.org.ecom.service.UserService;
 import com.org.ecom.utility.Criteria;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 public class AdminController {
-    //All working
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -32,7 +32,6 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @ApiOperation(value = "home page for admin")
     @GetMapping("/admin/home")
     public ResponseEntity adminHome() {
         String msg = "Admin home";
@@ -40,9 +39,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin/listAllCustomers")
-    public List<RegisteredCustomerDto> getAllCustomers(@RequestParam(name = "pageNo", required = true, defaultValue = "0") Integer pageNo,
-                                                       @RequestParam(name = "pageSize", required = true, defaultValue = "10") Integer pageSize,
-                                                       @RequestParam(name = "sortBy", defaultValue = "id") String sortBy) {
+    public List<RegisteredCustomer> getAllCustomers(@RequestParam(name = "pageNo", required = true, defaultValue = "0") Integer pageNo,
+                                                    @RequestParam(name = "pageSize", required = true, defaultValue = "10") Integer pageSize,
+                                                    @RequestParam(name = "sortBy", defaultValue = "id") String sortBy) {
         return adminService.getAllRegisteredCustomers(pageNo, pageSize, sortBy);
     }
 
@@ -75,9 +74,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/userget")
-    public UserEntity getProfile(@RequestParam("email") String email) {
+    public User getProfile(@RequestParam("email") String email) {
         return criteria.findByEmail(email);
     }
-
 }
-*/

@@ -14,13 +14,11 @@ import java.util.Set;
 @EnableJpaRepositories
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    @Query(value = "select * from USER u where u.MOBILE =:mobile and u.IS_ACTIVE= :isActive", nativeQuery = true)
-    public List<UserEntity> getUserByMobile(@Param("isActive") Boolean isActive, @Param("mobile") String mobile);
-
-/*
     Optional<UserEntity> findById(Long id);
 
-    UserEntity findByUsername(String username);
+    Optional<UserEntity> findByUsername(String username);
+
+    Boolean existsByUsername(String username);
 
     UserEntity findByEmail(String email);
 
@@ -37,7 +35,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     //Modifying queries only used with void int return type
     @Modifying
     @Query(value = "update USER u SET u.IS_ACTIVE = :isActive WHERE u.USER_NAME = :username", nativeQuery = true)
-    void deleteUserByUserName(@Param("isActive") Boolean isActive, @Param("username") String username);*/
+    void deleteUserByUserName(@Param("isActive") Boolean isActive, @Param("username") String username);
 
 
     /*@Modifying

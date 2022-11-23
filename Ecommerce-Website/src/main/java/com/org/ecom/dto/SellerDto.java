@@ -9,6 +9,7 @@ import javax.persistence.Column;
 @Setter
 @Getter
 @NoArgsConstructor
+
 public class SellerDto extends UserDto {
 
     @Column(unique = true)
@@ -20,14 +21,10 @@ public class SellerDto extends UserDto {
     @Column(unique = true)
     private String companyName;
 
-    public SellerDto(String email, String username, String firstName, String middleName, String lastName, String password, String confirmPassword, String gst, Long companyContact, String companyName) {
-        super(email, username, firstName, middleName, lastName, password, confirmPassword);
-        this.gstin = gst;
+    public SellerDto(String email, String username, String firstName, String middleName, String lastName, String password, String confirmPassword, AddressDto address, String gstin, Long companyContact, String companyName) {
+        super(email, username, firstName, middleName, lastName, password, confirmPassword, address);
+        this.gstin = gstin;
         this.companyContact = companyContact;
         this.companyName = companyName;
-    }
-
-    public SellerDto(String email, String username, String firstName, String middleName, String lastName, String password, String confirmPassword) {
-        super(email, username, firstName, middleName, lastName, password, confirmPassword);
     }
 }

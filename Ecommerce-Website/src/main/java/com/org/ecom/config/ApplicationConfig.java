@@ -4,19 +4,14 @@ package com.org.ecom.config;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @Configuration
+@EnableAsync
 public class ApplicationConfig {
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper;
-    }
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder()
-    {
-        return new BCryptPasswordEncoder();
     }
 }

@@ -13,11 +13,6 @@ import java.util.Set;
 
 @EnableJpaRepositories
 public interface SellerRepository extends JpaRepository<Seller, Long> {
-
-    Optional<Seller> findByCompanyName(String companyName);
-
-    Seller findByGstin(String gstin);
-
     Optional<Seller> findById(Long id);
 
     Seller findByUsername(String username);
@@ -29,8 +24,8 @@ public interface SellerRepository extends JpaRepository<Seller, Long> {
     @Query(value = "select c.ID from SELLER c", nativeQuery = true)
     List<Long> findAllSellerId();
 
-    @Query(value = "select * from USER u where u.EMAIL!= :email and u.IS_ACTIVE= :isActive and u.ID in(:sellerIds)", nativeQuery = true)
-    Set<Seller> listOfActiveUser(@Param("email") String email, @Param("isActive") Boolean isActive, @Param("sellerIds") List<Long> sellerIds);
+    @Query(value = "select * from USER u where u.EMAIL!= :email and u.IS_ACTIVE= :isActive", nativeQuery = true)
+    Set<Seller> listOfActiveUser(@Param("email") String email, @Param("isActive") Boolean isActive);
 
     //Modifying queries only used with void int return type
     @Modifying
@@ -41,6 +36,7 @@ public interface SellerRepository extends JpaRepository<Seller, Long> {
     @Modifying
     @Query(value = "update USER u SET u.IS_ACTIVE = :isActive,u.IS_DELETED =:isDeleted WHERE u.USER_NAME = :username", nativeQuery = true)
     void deleteSellerByUserName(@Param("isActive") Boolean isActive, @Param("isDeleted") Boolean isDeleted, @Param("username") String username);
+
 
     /*@Modifying
     @Query(value = "update USER u SET u.USER_NAME =:username,u.FIRST_NAME =:firstname,u.LAST_NAME =:lastname, u.MIDDLE_NAME =:middlename" +

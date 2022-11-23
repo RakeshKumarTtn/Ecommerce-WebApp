@@ -3,6 +3,7 @@ package com.org.ecom.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
@@ -12,9 +13,11 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Setter
 @Getter
+
 public class UserDto {
 
-    private Long userId;
+    @Autowired
+    private AddressDto address;
 
     @NotEmpty
     private String username;
@@ -31,10 +34,6 @@ public class UserDto {
     @NotEmpty
     @Email(message = "Invalid Email")
     private String email;
-
-    @NotEmpty
-    @Column(nullable = false, unique = true)
-    private long mobile;
 
     @NotEmpty(message = "Password cannot be null")
     @Size(min = 8)
@@ -54,7 +53,7 @@ public class UserDto {
 
     private Boolean isLocked;
 
-    public UserDto(String email, String username, String firstName, String middleName, String lastName, String password, String confirmPassword) {
+    public UserDto(String email, String username, String firstName, String middleName, String lastName, String password, String confirmPassword, AddressDto address) {
         this.email = email;
         this.username = username;
         this.firstName = firstName;
@@ -62,5 +61,7 @@ public class UserDto {
         this.lastName = lastName;
         this.password = password;
         this.confirmPassword = confirmPassword;
+        this.address = address;
     }
+
 }

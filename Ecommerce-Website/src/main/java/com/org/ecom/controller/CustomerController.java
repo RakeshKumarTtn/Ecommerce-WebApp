@@ -1,5 +1,6 @@
 package com.org.ecom.controller;
 
+
 import com.org.ecom.dto.CustomerDto;
 import com.org.ecom.dto.UserDto;
 import com.org.ecom.entities.Customer;
@@ -9,16 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
 @RestController
-@RequestMapping(path = "/api/v1/ecom/customer")
+@RequestMapping("/api/v1/customer")
+//@PreAuthorize("hasRole('CUSTOMER','ADMIN')"
 public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+
 
     @GetMapping("/home")
     ResponseEntity customerHome() {
@@ -26,7 +30,7 @@ public class CustomerController {
         return new ResponseEntity(msg, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/register_customer")
     public UserDto addCustomer(@RequestBody CustomerDto customerDto) {
         return customerService.addCustomer(customerDto);
     }
@@ -52,10 +56,4 @@ public class CustomerController {
         return customerService.updateCustomer(customerDto, email);
     }
 
-    /*
-        @PatchMapping(path = "/update")
-        @ResponseBody
-        public ResponseEntity updateUserPatch(@RequestBody UserDto userDto) {
-            return userService.updateUserPatch(userDto);
-    }*/
 }
