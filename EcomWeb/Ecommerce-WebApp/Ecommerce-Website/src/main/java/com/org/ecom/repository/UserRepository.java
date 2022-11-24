@@ -1,6 +1,7 @@
 package com.org.ecom.repository;
 
 import com.org.ecom.entities.UserEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,6 +24,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     UserEntity findByEmail(String email);
 
     List<UserEntity> findAll();
+
+    @Query(value = "select ID from USER where ID in(select USER_ID from USER_ROLE where ROLE_ID in(select roleId from ROLE where AUTHORITY='CUSTOMER'))", nativeQuery = true)
+    List<Long> findIdOfCustomers(Pageable pageable);
+
+    @Query(value = "select ID from USER where ID in(select USER_ID from USER_ROLE where ROLE_ID in(select roleId from ROLE where AUTHORITY='SELLER'))", nativeQuery = true)
+    List<Long> findIdOfSellers(Pageable pageable);
 
     @Modifying
     @Query(value = "update USER u set u.INVALID_ATTEMPT_COUNT = u.INVALID_ATTEMPT_COUNT - 1 where u.USER_NAME = :username", nativeQuery = true)

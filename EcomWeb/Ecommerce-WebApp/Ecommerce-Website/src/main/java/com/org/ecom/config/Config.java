@@ -2,6 +2,7 @@ package com.org.ecom.config;
 
 import com.org.ecom.security.CustomJWTAuthFilter;
 import com.org.ecom.service.CustomUserService;
+import com.org.ecom.utility.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -42,8 +43,8 @@ public class Config extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/**").permitAll()
                 .antMatchers("/api/v1/register/**").permitAll()
-                .antMatchers("/api/v1/seller/**").hasAnyAuthority("ADMIN","SELLER")
-                .antMatchers("/api/v1/customer/**").hasAnyAuthority("ADMIN","CUSTOMER")
+                .antMatchers("/api/v1/seller/**").hasAnyAuthority("ADMIN", "SELLER")
+                .antMatchers("/api/v1/customer/**").hasAnyAuthority("ADMIN", "CUSTOMER")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
@@ -76,5 +77,4 @@ public class Config extends WebSecurityConfigurerAdapter {
 //        return NoOpPasswordEncoder.getInstance();
         return new BCryptPasswordEncoder(10);
     }
-
 }
