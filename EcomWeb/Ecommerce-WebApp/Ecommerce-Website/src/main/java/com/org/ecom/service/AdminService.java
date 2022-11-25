@@ -92,12 +92,12 @@ public class AdminService {
         if (optionalUser.isPresent()) {
             user = optionalUser.get();
             if (user.getIsLocked() == true)
-                return ResponseEntity.ok().body(messageSource.getMessage("message26.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok().body(messageSource.getMessage("message2.txt", l, LocaleContextHolder.getLocale()));
             else {
                 user.setIsLocked(true);
                 userRepository.save(user);
-                emailSenderService.sendEmail(user.getEmail(), "Regarding Account Locked", "Dear " + user.getFirstName() + " " + user.getLastName() + " " + messageSource.getMessage("message28.txt", l, LocaleContextHolder.getLocale()));
-                return ResponseEntity.ok().body(messageSource.getMessage("message27.txt", l, LocaleContextHolder.getLocale()));
+                emailSenderService.sendEmail(user.getEmail(), "Regarding Account Locked", "Dear " + user.getFirstName() + " " + user.getLastName() + " " + messageSource.getMessage("message11.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok().body(messageSource.getMessage("message5.txt", l, LocaleContextHolder.getLocale()));
             }
         } else {
             throw new UserNotFoundException(messageSource.getMessage("message3.txt", l, LocaleContextHolder.getLocale()));
@@ -111,12 +111,12 @@ public class AdminService {
         if (optionalUser.isPresent()) {
             user = optionalUser.get();
             if (user.getIsLocked() == false) {
-                return ResponseEntity.ok().body(messageSource.getMessage("message24.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok().body(messageSource.getMessage("message1.txt", l, LocaleContextHolder.getLocale()));
             } else {
                 user.setIsLocked(false);
                 userRepository.save(user);
-                emailSenderService.sendEmail(user.getEmail(), "regarding account", "Dear " + user.getFirstName() + " " + user.getLastName() + " " + messageSource.getMessage("message29.txt", l, LocaleContextHolder.getLocale()));
-                return ResponseEntity.ok().body(messageSource.getMessage("message25.txt", l, LocaleContextHolder.getLocale()));
+                emailSenderService.sendEmail(user.getEmail(), "regarding account", "Dear " + user.getFirstName() + " " + user.getLastName() + " " + messageSource.getMessage("message12.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok().body(messageSource.getMessage("message4.txt", l, LocaleContextHolder.getLocale()));
             }
         } else {
             throw new UserNotFoundException(messageSource.getMessage("message3.txt", l, LocaleContextHolder.getLocale()));

@@ -95,8 +95,6 @@ public class CustomUserService implements UserDetailsService {
         emailSenderService.sendEmail(seller.getEmail(),
                 "Regarding Account activation.",
                 "Activate your account using this link within 24 hours.\n" + resetToken);
-
-
         customUsersRepository.save(seller);
     }
 

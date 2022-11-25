@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,23 +49,23 @@ public class UserService {
         Optional<UserEntity> getuser = userRepository.findById(customerId);
 
         if (!getuser.isPresent()) {
-            throw new UserNotFoundException(messageSource.getMessage("message30.txt", l, LocaleContextHolder.getLocale()) + customerId);
+            throw new UserNotFoundException(messageSource.getMessage("message6.txt", l, LocaleContextHolder.getLocale()) + customerId);
         } else {
             UserEntity user = getuser.get();
             if (user.getIsActive() == false) {
                 user.setIsActive(true);
                 userRepository.save(user);
                 emailSenderService.sendEmail(user.getEmail(), "Your Ecommerce Account has been activated", user.getFirstName() + user.getLastName() + " Welcome to Ecommerce-App \nAccount Activated Successfully");
-                return ResponseEntity.ok(messageSource.getMessage("message32.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok(messageSource.getMessage("message7.txt", l, LocaleContextHolder.getLocale()));
             } else
-                return ResponseEntity.ok(messageSource.getMessage("message31.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok(messageSource.getMessage("message8.txt", l, LocaleContextHolder.getLocale()));
         }
     }
 
     public ResponseEntity deactivateCustomer(@RequestParam long customerId) {
         Optional<UserEntity> getuser = userRepository.findById(customerId);
         if (!getuser.isPresent()) {
-            throw new UserNotFoundException(messageSource.getMessage("message30.txt", l, LocaleContextHolder.getLocale()) + customerId);
+            throw new UserNotFoundException(messageSource.getMessage("message6.txt", l, LocaleContextHolder.getLocale()) + customerId);
         } else {
             UserEntity user = getuser.get();
             if (user.getIsActive() == true) {
@@ -74,9 +73,9 @@ public class UserService {
                 userRepository.save(user);
 
                 emailSenderService.sendEmail(user.getEmail(), "Your Ecommerce Account has been deactivated", "Dear " + user.getFirstName() + " " + user.getLastName() + " Your Ecommerce-App Account de-Activated Successfully");
-                return ResponseEntity.ok(messageSource.getMessage("message33.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok(messageSource.getMessage("message9.txt", l, LocaleContextHolder.getLocale()));
             } else
-                return ResponseEntity.ok(messageSource.getMessage("message34.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok(messageSource.getMessage("message10.txt", l, LocaleContextHolder.getLocale()));
         }
     }
 
@@ -84,23 +83,23 @@ public class UserService {
         Optional<UserEntity> getuser = userRepository.findById(sellerId);
 
         if (!getuser.isPresent()) {
-            throw new UserNotFoundException(messageSource.getMessage("message30.txt", l, LocaleContextHolder.getLocale()) + sellerId);
+            throw new UserNotFoundException(messageSource.getMessage("message6.txt", l, LocaleContextHolder.getLocale()) + sellerId);
         } else {
             UserEntity user = getuser.get();
             if (user.getIsActive() == false) {
                 user.setIsActive(true);
                 userRepository.save(user);
                 emailSenderService.sendEmail(user.getEmail(), "Your Ecommerce Account has been activated", user.getFirstName() + user.getLastName() + " Welcome to Ecommerce-App \nAccount Activated Successfully");
-                return ResponseEntity.ok(messageSource.getMessage("message32.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok(messageSource.getMessage("message7.txt", l, LocaleContextHolder.getLocale()));
             } else
-                return ResponseEntity.ok(messageSource.getMessage("message31.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok(messageSource.getMessage("message8.txt", l, LocaleContextHolder.getLocale()));
         }
     }
 
     public ResponseEntity deactivateSeller(@RequestParam long sellerId) {
         Optional<UserEntity> getuser = userRepository.findById(sellerId);
         if (!getuser.isPresent()) {
-            throw new UserNotFoundException(messageSource.getMessage("message30.txt", l, LocaleContextHolder.getLocale()) + sellerId);
+            throw new UserNotFoundException(messageSource.getMessage("message6.txt", l, LocaleContextHolder.getLocale()) + sellerId);
         } else {
             UserEntity user = getuser.get();
             if (user.getIsActive() == true) {
@@ -108,9 +107,9 @@ public class UserService {
                 userRepository.save(user);
 
                 emailSenderService.sendEmail(user.getEmail(), "Your Ecommerce Account has been deactivated", "Dear " + user.getFirstName() + " " + user.getLastName() + " Your Ecommerce-App Account de-Activated Successfully");
-                return ResponseEntity.ok(messageSource.getMessage("message33.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok(messageSource.getMessage("message9.txt", l, LocaleContextHolder.getLocale()));
             } else
-                return ResponseEntity.ok(messageSource.getMessage("message34.txt", l, LocaleContextHolder.getLocale()));
+                return ResponseEntity.ok(messageSource.getMessage("message10.txt", l, LocaleContextHolder.getLocale()));
         }
     }
 }

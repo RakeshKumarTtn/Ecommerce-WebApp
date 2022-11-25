@@ -11,6 +11,7 @@ import com.org.ecom.entities.Seller;
 import com.org.ecom.entities.UserEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,9 +20,13 @@ public class ObjectConverter {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public Seller dtoToEntity(SellerDto sellerDto) {
         Seller seller = modelMapper.map(sellerDto, Seller.class);
-//        seller.setIsActive(!APPConstant.IS_ACTIVE);
+        seller.setPassword(passwordEncoder.encode(sellerDto.getPassword()));
+        seller.setIsActive(!APPConstant.IS_ACTIVE);
         seller.setIsExpired(APPConstant.IS_EXPIRED);
         seller.setIsDeleted(APPConstant.IS_DELETED);
         seller.setIsLocked(APPConstant.IS_LOCKED);
@@ -41,7 +46,8 @@ public class ObjectConverter {
 
     public Customer dtoToEntity(CustomerDto customerDto) {
         Customer customer = modelMapper.map(customerDto, Customer.class);
-//        customer.setIsActive(!APPConstant.IS_ACTIVE);
+        customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
+        customer.setIsActive(!APPConstant.IS_ACTIVE);
         customer.setIsExpired(APPConstant.IS_EXPIRED);
         customer.setIsDeleted(APPConstant.IS_DELETED);
         customer.setIsLocked(APPConstant.IS_LOCKED);

@@ -26,5 +26,5 @@ public class Seller extends UserEntity {
     private String companyName;
 
     @Column(name = "COMPANY_CONTACT", updatable = true, nullable = false)
-    private String companyContact;
+    private Long companyContact;
 }
