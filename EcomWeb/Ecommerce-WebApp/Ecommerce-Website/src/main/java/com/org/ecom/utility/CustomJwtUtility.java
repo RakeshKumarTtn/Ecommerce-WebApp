@@ -18,7 +18,7 @@ import java.util.function.Function;
 @Service
 public class CustomJwtUtility implements Serializable {
 
-    private String SECRET_KEY="secret";
+    private String SECRET_KEY = "secret";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -33,6 +33,7 @@ public class CustomJwtUtility implements Serializable {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
+
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
@@ -50,7 +51,7 @@ public class CustomJwtUtility implements Serializable {
     private String createAccessToken(Map<String, Object> claims, String subject) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 *  10))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 

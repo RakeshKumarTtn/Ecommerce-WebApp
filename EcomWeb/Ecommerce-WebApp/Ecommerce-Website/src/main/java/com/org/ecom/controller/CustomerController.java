@@ -23,7 +23,6 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-
     @GetMapping("/home")
     ResponseEntity customerHome() {
         String msg = "Customer Home";

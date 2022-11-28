@@ -28,7 +28,8 @@ public class UserService {
     private Long[] l = {};
 
     public UserEntity getProfile(String email) {
-        return userRepository.findByEmail(email);
+        UserEntity userEntity = userRepository.findByEmail(email);
+        return userEntity;
     }
 
     @Transactional

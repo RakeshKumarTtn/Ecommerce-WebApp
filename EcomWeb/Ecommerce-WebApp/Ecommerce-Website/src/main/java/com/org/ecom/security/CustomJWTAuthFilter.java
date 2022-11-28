@@ -46,7 +46,7 @@ public class CustomJWTAuthFilter extends OncePerRequestFilter {
         String requestTokenHeader = request.getHeader("Authorization");
         String username = "";
         String jwtToken = null;
-        Date date_access_token = new Date(1000 * 60 * 10);
+        Date date_access_token = new Date(1000 * 60 * 60);
 //        Date date_refresh_token = new Date(1000 * 60 * 60 * 24);
         Date date_reset_token = new Date(1000 * 60 * 5);
 
@@ -83,9 +83,7 @@ public class CustomJWTAuthFilter extends OncePerRequestFilter {
                     } else {
                         System.out.println("Token is not validated");
                     }
-                }
-
-                else {
+                } else {
                     System.out.println("Token is not correct");
                 }
             } else {

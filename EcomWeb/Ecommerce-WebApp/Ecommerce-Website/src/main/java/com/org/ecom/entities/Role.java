@@ -1,5 +1,6 @@
 package com.org.ecom.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ public class Role {
     private Long roleId;
 
     @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<UserEntity> users;
 
     @Column(name = "AUTHORITY", updatable = true, nullable = false)

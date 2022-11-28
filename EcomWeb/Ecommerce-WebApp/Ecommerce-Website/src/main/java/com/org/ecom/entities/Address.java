@@ -1,5 +1,6 @@
 package com.org.ecom.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,5 +50,6 @@ public class Address implements Serializable {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private UserEntity user;
 }

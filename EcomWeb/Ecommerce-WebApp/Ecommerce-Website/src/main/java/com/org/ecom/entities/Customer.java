@@ -21,5 +21,5 @@ import javax.persistence.*;
 public class Customer extends UserEntity {
 
     @Column(name = "COMPANY_CONTACT", updatable = true, nullable = false)
-    private String contact;
+    private Long contact;
 }
