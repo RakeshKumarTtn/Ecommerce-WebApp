@@ -54,6 +54,14 @@ public class AdminService {
 
     Logger logger = LoggerFactory.getLogger(AdminService.class);
 
+    /*
+        Method for getting a single Customer Information
+        MappingJacksonValue object is used for returning the required field when someone hit API for finding the Customer
+        Details...
+        MappingJacksonValue Object is used for performing the Dynamic Filtering
+        Customer is fetched and return to the postman in such a way it will follow the
+        pagination and sorting mechanism...
+    */
     public MappingJacksonValue listAllCustomers(String email) {
         PageRequest pageable = PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "userId"));
         List<Customer> customers;
@@ -77,6 +85,14 @@ public class AdminService {
         return mappingJacksonValue;
     }
 
+    /*
+      Method for getting a single Seller Information
+      MappingJacksonValue object is used for returning the required field when someone hit API for finding the Seller
+      Details...
+      MappingJacksonValue Object is used for performing the Dynamic Filtering
+      Customer is fetched and return to the postman in such a way it will follow the
+      pagination and sorting mechanism...
+  */
     public MappingJacksonValue listAllSellers(String email) {
 
         PageRequest pageable = PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "userId"));
@@ -100,6 +116,14 @@ public class AdminService {
         return mappingJacksonValue;
     }
 
+    /*
+      Method for getting All Customer Information
+      MappingJacksonValue object is used for returning the required field when someone hit API for finding the Seller
+      Details...
+      MappingJacksonValue Object is used for performing the Dynamic Filtering
+      Customer is fetched and return to the postman in such a way it will follow the
+      pageNo, pageSize, sortBy pagination and sorting mechanism...
+  */
     public MappingJacksonValue getAllRegisteredCustomers(Integer pageNo, Integer pageSize, String sortBy) {
         PageRequest pageable = PageRequest.of(pageNo, pageSize, Sort.by(Sort.Direction.ASC, sortBy));
 
@@ -115,6 +139,14 @@ public class AdminService {
         return mappingJacksonValue;
     }
 
+    /*
+        Method for getting All Seller Information
+        MappingJacksonValue object is used for returning the required field when someone hit API for finding the Seller
+        Details...
+        MappingJacksonValue Object is used for performing the Dynamic Filtering
+        Customer is fetched and return to the postman in such a way it will follow the
+        pageNo, pageSize, sortBy pagination and sorting mechanism...
+    */
     public MappingJacksonValue getAllRegisteredSellers(Integer pageNo, Integer pageSize, String sortBy) {
         PageRequest pageable = PageRequest.of(pageNo, pageSize, Sort.by(Sort.Direction.ASC, sortBy));
 
@@ -131,6 +163,11 @@ public class AdminService {
         return mappingJacksonValue;
     }
 
+    /*
+        Method for activation of Customer Account if account is already Activated then
+        it will return "Already Activated" Message
+        Otherwise it will activate the Customer Account
+    */
     @Transactional
     public ResponseEntity<String> activateCustomer(Long id) {
         if (adminActivationValidations.ActivationValidationsCustomer(id)) {
@@ -146,6 +183,11 @@ public class AdminService {
         return ResponseEntity.ok(messageSource.getMessage("message8.txt", l, LocaleContextHolder.getLocale()));
     }
 
+    /*
+      Method for De Activation of Customer Account if account is already de Activated then
+      it will return "Already De Activated" Message
+      Otherwise it will de activate the Customer Account
+  */
     @Transactional
     public ResponseEntity<String> deactivateCustomer(String username, Long id) {
 
@@ -164,6 +206,11 @@ public class AdminService {
         return ResponseEntity.ok(messageSource.getMessage("message10.txt", l, LocaleContextHolder.getLocale()));
     }
 
+    /*
+       Method for activation of Seller Account if account is already Activated then
+       it will return "Already Activated" Message
+       Otherwise it will activate the Seller Account
+   */
     @Transactional
     public ResponseEntity<String> activateSeller(Long id) {
         if (adminActivationValidations.ActivationValidationsSeller(id)) {
@@ -176,6 +223,11 @@ public class AdminService {
         return ResponseEntity.ok(messageSource.getMessage("message8.txt", l, LocaleContextHolder.getLocale()));
     }
 
+    /*
+     Method for De Activation of Seller Account if account is already de Activated then
+     it will return "Already De Activated" Message
+     Otherwise it will de activate the Seller Account
+    */
     @Transactional
     public ResponseEntity<String> deactivateSeller(Long id) {
         if (adminActivationValidations.DeactivationValidationsSeller(id)) {
@@ -188,6 +240,11 @@ public class AdminService {
         return ResponseEntity.ok(messageSource.getMessage("message10.txt", l, LocaleContextHolder.getLocale()));
     }
 
+    /*
+     Method for Locking of User Account if account is already Locked then
+     it will return "Already Locked" Message
+     Otherwise it will Lock the User Account
+    */
     public ResponseEntity<String> lockUser(Long user_id) {
         UserEntity user = null;
         Optional<UserEntity> optionalUser = userRepository.findById(user_id);
@@ -206,6 +263,11 @@ public class AdminService {
         }
     }
 
+    /*
+      Method for unLocking of User Account if account is already Locked then
+      it will return "Already unLocked" Message
+      Otherwise it will unLock the User Account
+    */
     public ResponseEntity<String> unlockUser(Long user_id) {
         UserEntity user = null;
         Optional<UserEntity> optionalUser = userRepository.findById(user_id);

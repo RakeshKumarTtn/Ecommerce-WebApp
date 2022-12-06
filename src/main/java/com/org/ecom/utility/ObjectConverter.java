@@ -1,6 +1,5 @@
 package com.org.ecom.utility;
 
-import com.org.ecom.constant.APPConstant;
 import com.org.ecom.dto.login.AddressDto;
 import com.org.ecom.dto.login.CustomerDto;
 import com.org.ecom.dto.login.SellerDto;

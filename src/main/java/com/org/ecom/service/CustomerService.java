@@ -88,6 +88,12 @@ public class CustomerService {
     @Value("${project.image}")
     public String path;
 
+    /*
+        Method for registration of Customer while registration check the below conditions:
+            Check password and confirm password is matched or not.
+            Giving Customer role to the Customer
+            Sending the Mail to the Customer
+    */
     public void registerCustomer(CustomerDto customerDto) {
 
         if (registerValidations.passwordAndConfirmPasswordMatchCustomer(customerDto)) {
@@ -123,10 +129,17 @@ public class CustomerService {
         }
     }
 
+    /*
+        Method for fetching the Customer according to the ID
+    */
     public Optional<Customer> findByUserId(Long id) {
         return customerRepository.findById(id);
     }
 
+    /*
+        Method for fetching the Customer Information from database
+        Token is passed and used for getting the Customer Information from the database
+    */
     public MappingJacksonValue customerData(String token) {
         String username = customJwtUtility.extractUsername(token);
         Customer customer = customerRepository.findByUsername(username)
@@ -147,6 +160,7 @@ public class CustomerService {
         return mappingJacksonValue;
     }
 
+    //Method for getting the customer Addresses
     public MappingJacksonValue viewCustomerAddresses(String token) {
 
         String username = customJwtUtility.extractUsername(token);
@@ -173,6 +187,7 @@ public class CustomerService {
         return mapping;
     }
 
+    //Method for updating the customer profile
     public ResponseEntity<String> updateCustomerProfile(Customer customer, Customer request) {
 
         if (request.getFirstName() != null)
@@ -195,6 +210,7 @@ public class CustomerService {
         return ResponseEntity.ok(messageSource.getMessage("message42.txt", null, LocaleContextHolder.getLocale()));
     }
 
+    //Method for updating the Customer Password
     public ResponseEntity<String> updatePassword(Long id, String password, String confirmPassword) {
 
         Optional<Customer> customerById = customerRepository.findById(id);
@@ -224,6 +240,7 @@ public class CustomerService {
             throw new UserNotFoundException(messageSource.getMessage("message46.txt", null, LocaleContextHolder.getLocale()));
     }
 
+    //Method for updating the Customer Addresses
     public ResponseEntity<String> updateAddress(Long id, Integer address_id, Address address) {
         Optional<Address> byId = addressRepository.findByAddressId(address_id);
         Customer customer = customerRepository.findById(id).get();
@@ -258,6 +275,7 @@ public class CustomerService {
             return ResponseEntity.ok(messageSource.getMessage("message34.txt", null, LocaleContextHolder.getLocale()));
     }
 
+    //Method for add new address of Customers
     public ResponseEntity<String> addAddressForUser(Long id, Address address) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
         if (!optionalCustomer.isPresent())
@@ -270,6 +288,7 @@ public class CustomerService {
         }
     }
 
+    //Method for deleting an address of a Customer
     public ResponseEntity<String> deleteAddressForUser(Long id, Integer address_id) {
         Customer customer = customerRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException(messageSource.getMessage("message48.txt", null, LocaleContextHolder.getLocale()) + id));

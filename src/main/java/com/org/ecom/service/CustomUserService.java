@@ -92,6 +92,10 @@ public class CustomUserService implements UserDetailsService {
 
     Logger logger = LoggerFactory.getLogger(CustomUserService.class);
 
+    /*
+        This method is username from database if the user found then it will return the object of
+        UserDetails otherwise it will throw an Exception UsernameNotFoundException
+    */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -102,10 +106,17 @@ public class CustomUserService implements UserDetailsService {
                 mapRolesToAuthorities(byUsername.getRoles()));
     }
 
+    /*
+        Method used for map roles to the authorities like Admin has some authorities for accessing
+        something,Seller has some another Authorities for access data
+    */
     private Collection<GrantedAuthority> mapRolesToAuthorities(Set<Role> rolesSet) {
         return rolesSet.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority())).collect(Collectors.toSet());
     }
 
+    /*
+        Method for fetching the User Information according to the username and email
+    */
     public UserEntity findUserByUsernameAndEmail(String username, String email) {
         UserEntity findByUsernameAndEmail = customUsersRepository.findByUsernameAndEmail(username, email)
                 .orElseThrow(() -> new UsernameNotFoundException(messageSource.getMessage("message59.txt", null, LocaleContextHolder.getLocale())));
@@ -113,6 +124,13 @@ public class CustomUserService implements UserDetailsService {
         return findByUsernameAndEmail;
     }
 
+    /*
+        Method used for Reset the password of a User it will Accept CustomResetPasswordDto
+        object in which there is a token, username, password and confirm Password
+
+        It will check password and confirm Password is same or not if not then return the failure message otherwise check
+        token is valide or not.
+    */
     public ResponseEntity<String> resetPassword(CustomResetPasswordDto customResetPassword) {
 
         CustomResetPasswordDto resetPassword = forgotPasswordValidations.resetValidations(customResetPassword);
@@ -141,7 +159,12 @@ public class CustomUserService implements UserDetailsService {
         return ResponseEntity.ok(messageSource.getMessage("message61.txt", null, LocaleContextHolder.getLocale()));
     }
 
-
+    /*
+        Method for forget the password of a User it will accept CustomMailRequestDto object in which there is a
+        username and email
+        then mail is generated and sent to the user containing to forget password token
+        then using the token user can access the reset password api for reset the password of the Account
+    */
     public ResponseEntity<String> forgotPassword(CustomMailRequestDto customMailRequest) throws ActivationException {
 
         if (forgotPasswordValidations.forget_password_validation(customMailRequest)) {
@@ -167,7 +190,12 @@ public class CustomUserService implements UserDetailsService {
         }
     }
 
-
+    /*
+        logout method is used for log out the Logged-in user
+        it will accept CustomJWTResponseDto object in this there is the token
+        From token we find the user and set its token values to expired
+        and then Save
+    */
     public ResponseEntity<String> logout(CustomJWTResponseDto customJWTResponse) {
 
         String jwtToken = customJWTResponse.getJwtToken();
@@ -184,6 +212,11 @@ public class CustomUserService implements UserDetailsService {
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
     }
 
+    /*
+        Method for generating access token for a user
+        It accepts CustomJWTResponseDto object in which there is the token named as refresh token
+        if the access token is expired then we can re_generate it using the refresh token
+    */
     public ResponseEntity<CustomJWTResponseDto> generate_access_token(CustomJWTResponseDto customJWTResponse) {
         String jwtToken = customJWTResponse.getJwtToken();
 
@@ -213,10 +246,20 @@ public class CustomUserService implements UserDetailsService {
         }
     }
 
+    /*
+        This Method is used for finding the User according to the username
+    */
     Optional<UserEntity> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+    /*
+        Method is used for login a user
+        It accepts CustomJWTRequestDto object in which there is the username and the password
+        It checks if the username and the password are correct or not.
+        If not correct then return the failure message otherwise return the access token by which
+        user can access the resources align to that
+    */
     public ResponseEntity<Map<String, CustomJWTResponseDto>> login(CustomJWTRequestDto jwtRequest) throws ActivationException {
 
         Map<String, CustomJWTResponseDto> map = new Hashtable();

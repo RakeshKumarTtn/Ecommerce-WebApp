@@ -1,4 +1,4 @@
-package com.org.ecom.config;
+package com.org.ecom.configuration;
 
 import com.org.ecom.security.CustomJWTAuthFilter;
 import com.org.ecom.security.CustomizedAuditorAware;
@@ -26,7 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableAsync
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
-public class ProjectConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomJWTAuthFilter jwtAuthFilter;

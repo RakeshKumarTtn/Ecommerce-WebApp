@@ -14,17 +14,19 @@ public class ActivationTokenService {
     @Autowired
     ActivationTokenRepo activationTokenRepo;
 
-    public void saveData(ActivationToken activationToken){
+    //Method for saving the activation token in the activation token table
+    public void saveData(ActivationToken activationToken) {
         activationTokenRepo.save(activationToken);
     }
 
-
-    public Optional<ActivationToken> findByToken(String token){
+    //Method for finding the Activation Token
+    public Optional<ActivationToken> findByToken(String token) {
         return activationTokenRepo.findByToken(token);
     }
 
+    //Method for deleting the token
     @Transactional
-    public void deleteToken(Long user_id,String jwtToken){
-        activationTokenRepo.delete(user_id,jwtToken);
+    public void deleteToken(Long user_id, String jwtToken) {
+        activationTokenRepo.delete(user_id, jwtToken);
     }
 }

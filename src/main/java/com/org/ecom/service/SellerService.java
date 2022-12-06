@@ -84,6 +84,7 @@ public class SellerService {
     @Autowired
     FileService fileService;
 
+    //Method for registration of seller
     public void registerSeller(SellerDto sellerDto) {
 
         if (registerValidations.passwordAndConfirmPasswordMatchSeller(sellerDto)) {
@@ -119,6 +120,7 @@ public class SellerService {
         }
     }
 
+    //Method for fetching the data of seller
     public MappingJacksonValue sellerData(String token) {
         String username = customJwtUtility.extractUsername(token);
         Seller seller = sellerRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username"));
@@ -138,10 +140,12 @@ public class SellerService {
         return mappingJacksonValue;
     }
 
+    //Method for fetching the seller according to the id
     public Optional<Seller> findByUserId(Long id) {
         return sellerRepository.findById(id);
     }
 
+    //Method for updating the data of seller
     public ResponseEntity<String> updateSellerProfile(Long id, Seller seller) {
 
         Seller savedSeller = sellerRepository.findById(id).orElseThrow(() ->
@@ -167,6 +171,7 @@ public class SellerService {
         return ResponseEntity.ok(messageSource.getMessage("message42.txt", null, LocaleContextHolder.getLocale()));
     }
 
+    //Method for updating the password of seller
     public ResponseEntity<String> updatePassword(Long id, String password, String confirmPassword) {
 
         Optional<Seller> sellerById = sellerRepository.findById(id);
@@ -196,6 +201,7 @@ public class SellerService {
             throw new UserNotFoundException(messageSource.getMessage("message46.txt", null, LocaleContextHolder.getLocale()));
     }
 
+    //method for updating the address of an seller
     public ResponseEntity<String> updateAddress(Long id, Integer address_id, Address address) {
         Optional<Address> byId = addressRepository.findByAddressId(address_id);
         Seller seller = sellerRepository.findById(id).get();

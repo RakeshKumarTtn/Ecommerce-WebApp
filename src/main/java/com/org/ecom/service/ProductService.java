@@ -82,6 +82,10 @@ public class ProductService {
 
     //PRODUCT API'S FOR SELLER
 
+    /*
+        Method for adding a product
+        Firstly check product if added only in the leaf node
+    */
     public ResponseEntity<String> addProduct(Product product, Long categoryId) {
         Optional<Category> category = categoryRepository.findById(categoryId);
         if (category.isPresent() && categoryRepository.checkIfLeaf(categoryId) == 0) {
@@ -120,6 +124,9 @@ public class ProductService {
         return new ResponseEntity<>(messageSource.getMessage("message88.txt", l, LocaleContextHolder.getLocale()), HttpStatus.OK);
     }
 
+    /*
+        Method for adding the Product Variation
+    */
     public void addProductVariation(ProductVariation productVariation, Long productId) {
         Optional<Product> product = productRepository.findById(productId);
         if (product.isPresent()) {
@@ -190,6 +197,9 @@ public class ProductService {
         }
     }
 
+    /*
+        Method for getting the product details
+    */
     public ProductDto getProduct(Long productId) {
 
         String username = userService.getLoggedInSeller().getUsername();
@@ -238,6 +248,9 @@ public class ProductService {
         }
     }
 
+    /*
+        Method for Deleting the Product
+    */
     public ResponseEntity<String> deleteProductById(Long id) {
         String username = userService.getLoggedInSeller().getUsername();
         Optional<Product> productOptional = productRepository.findById(id);
@@ -257,6 +270,9 @@ public class ProductService {
         return ResponseEntity.ok(product.getName() + " " + messageSource.getMessage("message113.txt", l, LocaleContextHolder.getLocale()));
     }
 
+    /*
+        Method for updating the product
+    */
     public ResponseEntity<String> updateProductByProductId(Long id, Product product) {
 
         Seller seller = userService.getLoggedInSeller();
@@ -301,6 +317,9 @@ public class ProductService {
         return ResponseEntity.ok(messageSource.getMessage("message115.txt", l, LocaleContextHolder.getLocale()));
     }
 
+    /*
+        Method for getting all the product
+    */
     public List<ViewProductDto> getProductDetails(Integer pageNo, Integer pageSize, String sortBy) {
         PageRequest paging = PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc(sortBy)));
         String username = userService.getLoggedInSeller().getUsername();
@@ -315,6 +334,9 @@ public class ProductService {
         return list;
     }
 
+    /*
+        Method for viewing a Single product for seller
+    */
     public ViewProductDto viewSingleProductForSeller(Long productId) {
         String username = userService.getLoggedInSeller().getUsername();
         Seller seller1 = sellerRepository.findByUsername(username).get();
@@ -355,6 +377,10 @@ public class ProductService {
     }
 
     //PRODUCT API'S FOR ADMIN
+
+    /*
+        Method for viewing the Product
+    */
     public ViewProductDtoCustomer viewSingleProductForAdmin(Long productId) {
         Optional<Product> product = productRepository.findById(productId);
         if (product.isPresent()) {
@@ -406,6 +432,9 @@ public class ProductService {
         }
     }
 
+    /*
+        Method for getting all product details along with the category
+    */
     public List<ViewProductDtoCustomer> getProductDetailsForAdmin(Integer pageNo, Integer pageSize, String sortBy) {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc(sortBy)));
         List<Long> longList = productRepository.getAllId(paging);
@@ -418,6 +447,9 @@ public class ProductService {
         return list;
     }
 
+    /*
+        Method for activate a product
+    */
     public ResponseEntity<String> activateProduct(Long id) {
         Optional<Product> product = productRepository.findById(id);
         if (!product.isPresent()) {
@@ -435,6 +467,9 @@ public class ProductService {
         return ResponseEntity.ok(messageSource.getMessage("message92.txt", l, LocaleContextHolder.getLocale()));
     }
 
+    /*
+          Method for de activate a product
+    */
     public ResponseEntity<String> deactivateProductById(Long id) {
         Optional<Product> product = productRepository.findById(id);
         if (!product.isPresent()) {

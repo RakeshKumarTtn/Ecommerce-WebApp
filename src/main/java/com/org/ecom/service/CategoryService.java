@@ -38,6 +38,16 @@ public class CategoryService {
 
     private final Long[] l = {};
 
+    /*
+        Method for add a new Category
+        In this method we will firstly check it is the root category or the child category
+        of an existing category.
+        If it is root category then the parentID of that category will be null.
+        If it is the child category of an existing category then its parentID will be the id
+        of Existing parent Category.
+        Also check the name of parent category and child category cannot be same.
+        If category is already present then return otherwise add that category
+    */
     public ResponseEntity<?> addCategory(String categoryName, Long parentCategoryId) {
         if (parentCategoryId != null) {
             if (categoryRepository.existsById(parentCategoryId)) {
@@ -73,6 +83,11 @@ public class CategoryService {
         }
     }
 
+    /*
+        Method for view a category according to the category ID
+        Firstly we check if the category is present or not if not present then
+        return the failure message otherwise return that category information
+    */
     public ResponseEntity<?> viewCategory(Long categoryId) {
         Optional<Category> currCategory = categoryRepository.findById(categoryId);
 
@@ -88,6 +103,10 @@ public class CategoryService {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
+    /*
+        Method for adding metadata field of a category
+        like Shirt having color,size
+    */
     public ResponseEntity<?> addMetadataField(String fieldName) {
         Optional<CategoryMetadataField> categoryMetadataField = categoryMetadataFieldRepository.findByCategoryMetadataFieldName(fieldName);
         if (categoryMetadataField.isPresent()) {
@@ -100,11 +119,19 @@ public class CategoryService {
         }
     }
 
+    /*
+        Method for view metadata field of a category like a category shirt having metadata like size, color
+        then it will return the list of them
+    */
     public ResponseEntity<?> viewMetadataField() {
         Iterable<CategoryMetadataField> metadataFields = categoryMetadataFieldRepository.findAll();
         return new ResponseEntity<>(metadataFields, HttpStatus.OK);
     }
 
+    /*
+        Method for viewing all the category present in the database
+        it will consist all information from parent category to the child category
+    */
     public ResponseEntity<List<Category>> viewAllCategory(Integer pageNo, Integer pageSize,
                                                           String sortBy, String orderBy) {
 
@@ -124,6 +151,11 @@ public class CategoryService {
     }
 
 
+    /*
+        Method for updating the Category
+        firstly we check the category is present or not if present then update the category
+        otherwise return the failure message
+    */
     public ResponseEntity<?> updateCategory(Long categoryId, String categoryName) {
         if (categoryRepository.existsById(categoryId)) {
             Category category = categoryRepository.findById(categoryId).get();
@@ -140,6 +172,10 @@ public class CategoryService {
         }
     }
 
+    /*
+        Method for adding the values of metadata field
+        A metadata field like Color then we add its values like RED,WHITE,PINK,BLACK
+    */
     public ResponseEntity<?> addCategoryMetadataFieldValues(Long categoryId, Long metadataFieldId, Set<String> values) {
         if (categoryRepository.existsById(categoryId)) {
             Category category = categoryRepository.findById(categoryId).get();
@@ -169,6 +205,10 @@ public class CategoryService {
         }
     }
 
+    /*
+        Method for updating the metadata field values like changing the
+        color deleting the color value or adding the color value
+    */
     public ResponseEntity<?> updateCategoryMetadataFieldValues(Long categoryId, Long metadataFieldId, Set<String> valueList) {
 
         if (!categoryRepository.existsById(categoryId)) {

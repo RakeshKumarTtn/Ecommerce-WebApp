@@ -1,6 +1,5 @@
 package com.org.ecom;
 
-import com.org.ecom.constant.APPConstant;
 import com.org.ecom.entity.registration.Address;
 import com.org.ecom.entity.registration.Admin;
 import com.org.ecom.entity.registration.Role;
@@ -9,6 +8,7 @@ import com.org.ecom.repository.registration.RoleRepository;
 import com.org.ecom.repository.registration.UserRepository;
 import com.org.ecom.security.CustomizedAuditorAware;
 import com.org.ecom.service.RoleService;
+import com.org.ecom.utility.APPConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,8 +17,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+import static com.org.ecom.enums.RoleLevel.*;
+
 @Component
-public class Bootstrap implements ApplicationRunner {
+public class AdminBootstrap implements ApplicationRunner {
 
     @Autowired
     RoleRepository rolesRepository;
@@ -37,6 +39,31 @@ public class Bootstrap implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        String roleSeller = String.valueOf(SELLER);
+        String roleCustomer = String.valueOf(CUSTOMER);
+        String roleAdmin = String.valueOf(ADMIN);
+
+
+        if (roleService.findAuthority(roleAdmin)) {
+            Role role1 = new Role();
+            role1.setAuthority(roleAdmin);
+            roleService.save(role1);
+        }
+
+
+        if (roleService.findAuthority(roleCustomer)) {
+            Role role2 = new Role();
+            role2.setAuthority(roleCustomer);
+            roleService.save(role2);
+        }
+
+
+        if (roleService.findAuthority(roleSeller)) {
+            Role role3 = new Role();
+            role3.setAuthority(roleSeller);
+            roleService.save(role3);
+        }
 
         if (userRepository.count() < 1) {
             Admin user = new Admin();

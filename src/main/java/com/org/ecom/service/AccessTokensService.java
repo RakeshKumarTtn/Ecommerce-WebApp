@@ -16,25 +16,30 @@ public class AccessTokensService {
     @Autowired
     AccessTokensRepo accessTokensRepo;
 
+    //Method for logout the user
     @Transactional
-    public void logout(String token){
+    public void logout(String token) {
         accessTokensRepo.logoutDeleteToken(token);
     }
 
+    //Method for checking token is expired or not
     @Transactional
-    public void expiredToken(Date date){
+    public void expiredToken(Date date) {
         accessTokensRepo.deleteExpiredTokens(date);
     }
 
-    public Optional<Set<AccessTokens>> findById(Long user_id){
-    return accessTokensRepo.findByUserId(user_id);
+    //Method for finding the id of access token
+    public Optional<Set<AccessTokens>> findById(Long user_id) {
+        return accessTokensRepo.findByUserId(user_id);
     }
 
-    public void saveData(AccessTokens accessTokens){
+    //Method for saving the data in the access token table
+    public void saveData(AccessTokens accessTokens) {
         accessTokensRepo.save(accessTokens);
     }
 
-    public Optional<AccessTokens> accessTokens(String token, Long id){
+    //Method for getting the access token from access token table
+    public Optional<AccessTokens> accessTokens(String token, Long id) {
         return accessTokensRepo.findByToken(token, id);
     }
 }

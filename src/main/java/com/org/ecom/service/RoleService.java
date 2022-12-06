@@ -11,10 +11,12 @@ public class RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
+    //Method for saving the role in the database
     public void save(Role role) {
         roleRepository.save(role);
     }
 
+    //Method for finding the authorities of particular Role
     public boolean findAuthority(String role) {
         if (roleRepository.findByAuthority(role).isPresent()) {
             return false;
@@ -22,5 +24,4 @@ public class RoleService {
             return true;
         }
     }
-
 }

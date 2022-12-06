@@ -26,6 +26,9 @@ public class FileServiceImpl implements FileService {
     @Autowired
     MessageSource messageSource;
 
+    /*
+        Method for Uploading the Image of User
+    */
     @Override
     public String uploadImage(String userName, String path, MultipartFile multipartFile) throws IOException {
         String originalFilename = multipartFile.getOriginalFilename();
@@ -48,6 +51,9 @@ public class FileServiceImpl implements FileService {
         return originalFilename;
     }
 
+    /*
+        Method for getting the image of user
+    */
     @Override
     public InputStream getUserImage(String path, String fileName) throws FileNotFoundException {
         String fullPath = path + File.separator + fileName;
@@ -55,6 +61,9 @@ public class FileServiceImpl implements FileService {
         return inputStream;
     }
 
+    /*
+        Method for finding all the files Present in the image folder
+    */
     public Set<String> listFilesUsingDirectoryStream() {
         String dir = "/home/rakesh/Documents/EcomWeb/Ecommerce-WebApp-master/Ecommerce-Website/src/main/resources/images/";
         Set<String> fileSet = new HashSet<>();

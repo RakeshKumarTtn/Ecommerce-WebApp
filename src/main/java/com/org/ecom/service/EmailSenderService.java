@@ -21,6 +21,9 @@ public class EmailSenderService {
 
     Logger logger = LoggerFactory.getLogger(EmailSenderService.class);
 
+    /*
+        Method for sending the mail to the user
+    */
     @Async
     public void sendEmail(String toEmail, String subject, String body) {
         logger.info(body);

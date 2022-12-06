@@ -1,4 +1,4 @@
-package com.org.ecom.audit;
+package com.org.ecom.auditable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ import java.util.Date;
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class Auditable<UserEntity> {
+public class AuditableImpl<UserEntity> {
     @CreatedBy
     protected UserEntity createdBy;
 

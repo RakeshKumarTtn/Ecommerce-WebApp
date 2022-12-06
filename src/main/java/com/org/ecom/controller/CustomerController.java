@@ -38,6 +38,7 @@ public class CustomerController {
     //API for getting the Customer Profile displaying the Mandatory Information
     @GetMapping("/my_profile")
     public MappingJacksonValue viewMyProfile(@RequestBody CustomJWTResponseDto customJWTResponse) {
+        Customer customer = userService.getLoggedInCustomer();
         return customerService.customerData(customJWTResponse.getJwtToken());
     }
 

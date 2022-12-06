@@ -15,14 +15,23 @@ public class ResetTokenService {
     @Autowired
     ResetTokenRepo resetTokenRepo;
 
+    /*
+        Method for saving the token
+    */
     public void saveData(ResetToken resetToken){
         resetTokenRepo.save(resetToken);
     }
 
+    /*
+        Method for fetching the token by id
+    */
     public Optional<ResetToken> findByToken(String token){
         return resetTokenRepo.findByToken(token);
     }
 
+    /*
+        Method for deleting the token
+    */
     @Transactional
    public void deleteToken(Long user_id, String jwtToken){
         resetTokenRepo.delete(user_id,jwtToken);
